@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Rating;
 
 class ProfileController extends Controller
 {
@@ -16,8 +17,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $userId = $request->user()->id;
+        $ratings = Rating::where('user_id', $userId)->get();
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'ratings' => $ratings,
         ]);
     }
 

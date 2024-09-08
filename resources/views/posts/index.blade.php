@@ -6,7 +6,7 @@
     </x-slot>
 
     <style>
-        .star{
+        .star {
             font-size: 300%;
             color: #a09a9a;
         }
@@ -18,13 +18,15 @@
             <h1>{{ $post->title }}</h1>
             <p>{{ $post->body }}</p>
             <div class="rating" data-post-id="{{ $post->id }}">
-                <span class="star" id="1">★</span>
-                <span class="star" id="2">★</span>
-                <span class="star" id="3">★</span>
-                <span class="star" id="4">★</span>
-                <span class="star" id="5">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
             </div>
         </div>
         @endforeach
     </div>
+
+    <script src="{{ asset('/js/index.js') }}"></script>
 </x-app-layout>

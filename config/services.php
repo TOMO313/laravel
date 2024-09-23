@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'google' => [
+        'token' => env('GOOGLE_ACCESS_TOKEN'),
+    ],
 ];

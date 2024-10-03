@@ -8,11 +8,8 @@ use App\Models\Post;
 
 class PostSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Post::factory()->count(5)->create();
+        Post::factory()->count(5)->create(); //PostFactoryクラスのdifinition()に従ってpostsデータを5件生成
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\MapController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,6 +26,8 @@ Route::get('/map', function () {
     return view('maps.map');
 })->middleware('auth')->name('map');
 
+Route::get('/route', [MapController::class, 'getRoute'])->middleware('auth')->name('route');
+
 Route::controller(RatingController::class)->middleware('auth')->group(function () {
     Route::post('/rating', 'store');
 });
@@ -33,8 +36,12 @@ Route::controller(LikeController::class)->middleware('auth')->group(function () 
     Route::post('/posts/like', 'store');
 });
 
-Route::get('/chart', function(){
+Route::get('/chart', function () {
     return view('charts.chart');
 })->middleware('auth')->name('chart');
+
+Route::get('/grid', function () {
+    return view('grids.grid');
+})->middleware('auth')->name('grid');
 
 require __DIR__ . '/auth.php';

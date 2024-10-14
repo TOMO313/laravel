@@ -26,7 +26,9 @@ Route::get('/map', function () {
     return view('maps.map');
 })->middleware('auth')->name('map');
 
-Route::get('/route', [MapController::class, 'getRoute'])->middleware('auth')->name('route');
+Route::controller(MapController::class)->middleware('auth')->group(function () {
+    Route::post('/route', 'getRoute')->name('route');
+});
 
 Route::controller(RatingController::class)->middleware('auth')->group(function () {
     Route::post('/rating', 'store');

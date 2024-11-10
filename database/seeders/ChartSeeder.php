@@ -15,20 +15,24 @@ class ChartSeeder extends Seeder
     {
         DB::table('charts')->insert([
             [
-                'number' => 10,
-                'yen' => 100,
+                'amount' => 100,
+                'year' => 2020,
             ],
             [
-                'number' => 20,
-                'yen' => 200,
+                'amount' => 100,
+                'year' => 2020,
             ],
             [
-                'number' => 30,
-                'yen' => 300,
+                'amount' => 200,
+                'year' => 2021,
             ],
             [
-                'number' => 40,
-                'yen' => 400,
+                'amount' => 300,
+                'year' => 2022,
+            ],
+            [
+                'amount' => 400,
+                'year' => 2023,
             ],
         ]);
     }

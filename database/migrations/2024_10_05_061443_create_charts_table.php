@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('charts', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
-            $table->integer('yen');
+            $table->integer('amount');
+            $table->integer('year');
             $table->timestamps();
         });
     }

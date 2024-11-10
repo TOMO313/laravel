@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
@@ -38,9 +39,9 @@ Route::controller(LikeController::class)->middleware('auth')->group(function () 
     Route::post('/posts/like', 'store');
 });
 
-Route::get('/chart', function () {
-    return view('charts.chart');
-})->middleware('auth')->name('chart');
+Route::controller(ChartController::class)->middleware('auth')->group(function () {
+    Route::get('/chart', 'getAmountByYear')->name('chart');
+});
 
 Route::get('/grid', function () {
     return view('grids.grid');

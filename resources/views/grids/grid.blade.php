@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet"/>
-  </head>
-  <body>
-    <div id="wrapper"></div>
+<x-app-layout>
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      {{ __('Grid') }}
+    </h2>
+  </x-slot>
 
-    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-    <script src="{{ asset('/js/grid.js') }}"></script>
-  </body>
-</html>
+  <div id="wrapper"></div>
+
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <script src="{{ asset('/js/grid.js') }}"></script>
+</x-app-layout>

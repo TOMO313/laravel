@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header"> {{-- <x-slot></x-slot>を使うことで、name属性で指定した変数名が定義しているコンポーネントに挿入できる --}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Index') }}
         </h2>
@@ -15,7 +15,9 @@
     <div class="p-6">
         @foreach($posts as $post)
         <div class="text-center rounded shadow-lg bg-white p-6">
-            <a href="/posts/{{ $post->id }}"><h1>{{ $post->title }}</h1></a>
+            <a href="/posts/{{ $post->id }}">
+                <h1>{{ $post->title }}</h1>
+            </a>
             <p>{{ $post->body }}</p>
             <div class="rating" data-post-id="{{ $post->id }}">
                 <span class="star">★</span>

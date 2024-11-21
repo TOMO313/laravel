@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\LikeController;
-use App\Http\Controllers\MapController;
+use App\Http\Controllers\ChartController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -41,6 +41,7 @@ Route::controller(LikeController::class)->middleware('auth')->group(function () 
 
 Route::controller(ChartController::class)->middleware('auth')->group(function () {
     Route::get('/chart', 'getAmountByYear')->name('chart');
+    Route::get('/google', 'getData')->name('google');
 });
 
 Route::get('/grid', function () {

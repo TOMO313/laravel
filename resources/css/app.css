@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* 5行目から7行目までをコピペすればページネーションを横並びにできる */
+.pagination li{
+    display: inline-block;
+}

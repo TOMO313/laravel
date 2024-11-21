@@ -13,4 +13,11 @@ class ChartController extends Controller
 
         return view('charts/chart', ['data' => $amountByYear]);
     }
+
+    public function getData()
+    {
+        $data = Chart::select('year')->selectRaw('SUM(amount) as sumAmount')->groupBy('year')->get();
+
+        return view('charts/google', ['data' => $data]);
+    }
 }

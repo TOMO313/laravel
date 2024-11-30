@@ -10,11 +10,22 @@
             font-size: 300%;
             color: #a09a9a;
         }
+
         .pagination {
             text-align: center;
             display: inline-block;
         }
     </style>
+
+    @if(session('success'))
+    <div class="text-center text-xl">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    <div class="text-center font-bold">
+        {{ $success_login_message }}
+    </div>
 
     <div class="p-6">
         @foreach($posts as $index => $post) {{-- $posts配列のインデックスを$indexに格納 --}}
@@ -26,7 +37,9 @@
                         <h1>{{ $post->title }}</h1>
                     </a>
                 </li>
-                <li><p>{{ $post->body }}</p></li>
+                <li>
+                    <p>{{ $post->body }}</p>
+                </li>
                 <div class="rating" data-post-id="{{ $post->id }}">
                     <span class="star">★</span>
                     <span class="star">★</span>

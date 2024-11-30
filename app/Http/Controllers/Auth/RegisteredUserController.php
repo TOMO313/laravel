@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Events\UserRegistered;
+use App\Jobs\SendWelcomeEmailJob;
 
 class RegisteredUserController extends Controller
 {
@@ -42,6 +44,10 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        event(new UserRegistered($user)); //イベントのUserRegisteredクラスをインスタンス化すると同時に$userを渡す
+        
+        SendWelcomeEmailJob::dispatch($user); //キューを実行できるJobクラスに$userを渡す
 
         Auth::login($user);
 

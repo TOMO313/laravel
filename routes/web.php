@@ -7,6 +7,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -47,5 +48,10 @@ Route::controller(ChartController::class)->middleware('auth')->group(function ()
 Route::get('/grid', function () {
     return view('grids.grid');
 })->middleware('auth')->name('grid');
+
+Route::controller(MessageController::class)->middleware('auth')->group(function () {
+    Route::get('/chat', 'index')->name('chat');
+    Route::post('/store', 'store')->name('chat.store');
+});
 
 require __DIR__ . '/auth.php';

@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header"> {{-- <x-slot></x-slot>を使うことで、name属性で指定した変数名が定義しているコンポーネントに挿入できる --}}
+    <x-slot:header> {{-- <x-slot></x-slot>を使うことで、name属性で指定した変数名が定義しているコンポーネントに挿入できる --}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Index') }}
         </h2>
-    </x-slot>
+    </x-slot:header>
 
     <style>
         .star {

@@ -8,9 +8,15 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SupermarketController;
+use App\Models\Supermarket;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/demo', function () {
+    return view('maps.demo-place');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -28,8 +34,13 @@ Route::get('/map', function () {
     return view('maps.map');
 })->middleware('auth')->name('map');
 
+Route::get('/place', function () {
+    return view('maps.place');
+});
+
 Route::controller(MapController::class)->middleware('auth')->group(function () {
     Route::post('/route', 'getRoute')->name('route');
+    Route::post('/place/store', 'storeNearPlace')->name('storeNearPlace');
 });
 
 Route::controller(RatingController::class)->middleware('auth')->group(function () {
@@ -52,6 +63,10 @@ Route::get('/grid', function () {
 Route::controller(MessageController::class)->middleware('auth')->group(function () {
     Route::get('/chat', 'index')->name('chat');
     Route::post('/store', 'store')->name('chat.store');
+});
+
+Route::controller(SupermarketController::class)->middleware('auth')->group(function () {
+    Route::get('/place/{place}', 'getPlaceInfo')->name('place.info');
 });
 
 require __DIR__ . '/auth.php';

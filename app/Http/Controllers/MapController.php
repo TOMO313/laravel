@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\Supermarket;
+use App\Models\OpeningHours;
 
 class MapController extends Controller
 {
@@ -97,5 +99,28 @@ class MapController extends Controller
         } catch (\Exception $e) {
             return null; //呼び出し元のgetRoute()に返すので、response()->json()を使って配列で返そうとするとエラーが起こる
         }
+    }
+
+    public function storeNearPlace(Request $request, Supermarket $supermarket)
+    {
+        $existingSupermarket = Supermarket::where('name', $request->placeName)->first();
+        if (!$existingSupermarket) {
+            $supermarket->name = $request->placeName;
+            $supermarket->address = $request->placeAddress;
+            $supermarket->latitude = $request->placeLat;
+            $supermarket->longitude = $request->placeLng;
+            $supermarket->website_url = $request->placeWebsite;
+            $supermarket->save();
+
+            foreach ($request->openingHours as $openingHour) {
+                //OpeningHoursクラスのインスタンスをループごとに生成しないと、同じレコードに対して値が挿入されてしまうため、最後に挿入されたデータが保存されてしまう(今回は日曜日の営業時間だけが保存される)
+                $openingHours = new OpeningHours();
+                $openingHours->opening_hours = $openingHour;
+                $openingHours->supermarket_id = $supermarket->id;
+                $openingHours->save();
+            }
+            return response()->json(['id' => $supermarket->id]);
+        }
+        return response()->json(['id' => $existingSupermarket->id]);
     }
 }
